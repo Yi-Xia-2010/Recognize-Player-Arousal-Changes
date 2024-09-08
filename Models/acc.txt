@@ -1,0 +1,13 @@
+vivit_finetuned_10epochs:
+0.765234375
+vivit_finetuned_15epochs:
+0.795703125
+acc_random_forest:
+0.63359375
+acc_contrastive_10epoch_classification:
+0.795703125
+acc_contrastive_15epoch_classification:
+0.799609375
+Contrastive_15epoch_extracted_MLP_classification :
+0.5078125
+
