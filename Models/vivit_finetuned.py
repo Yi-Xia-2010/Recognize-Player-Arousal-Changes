@@ -4,6 +4,7 @@ from PIL import Image
 from transformers import VivitImageProcessor, VivitForVideoClassification
 np.random.seed(0)
 import pandas as pd
+import os
 
 # %%
 # Define the path to the new sample pairs CSV file, adjust it if needed
@@ -13,9 +14,13 @@ new_csv_file_path = "../Dataset/new_solid.csv"
 # get the name and parent folder path in 'start_frame'
 
 def get_file_name_and_parent_folder(file_path):
-  file_name = file_path.split('/')[-1].split('.')[0]
-  parent_folder = '/'.join(file_path.split('/')[:-1])
-  return file_name, parent_folder
+  file_path = os.path.normpath(file_path)
+  file_paths = file_path.split(os.sep)
+  file_name, file_extension = os.path.splitext(os.path.basename(file_path))
+  parent_folder = os.path.dirname(file_path)
+  video_name = file_paths[-2]
+  player_id, session_id=video_name.split('_solid_')
+  return file_name, parent_folder, player_id, session_id
 
 
 # %%
@@ -59,7 +64,8 @@ class MyCSVDataset(Dataset):
                 frame_path = parent_folder + "/0" + str(file_name)+ ".png"
 
             # the frames path, adjust it if needed
-            frame_path = "../Dataset" + frame_path[1:]
+            frame_path = "../Dataset/" + frame_path
+            frame_path = os.path.normpath(frame_path)
           
             frame = Image.open(frame_path).convert('RGB')
             frames.append(frame)

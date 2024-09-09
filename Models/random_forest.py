@@ -2,12 +2,14 @@
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
 import numpy as np
+import os
 import random
 from PIL import Image
 import pandas as pd
 random.seed(0)
 np.random.seed(0)
 from transformers import VivitImageProcessor
+
 # %% [markdown]
 # Prepare dataset
 
@@ -23,9 +25,11 @@ print(f"Unique classes: {list(label2id.keys())}.")
 
 # %%
 def get_file_name_and_parent_folder(file_path):
-  file_name = file_path.split('/')[-1].split('.')[0]
-  parent_folder = '/'.join(file_path.split('/')[:-1])
-  video_name = file_path.split('/')[-2]
+  file_path = os.path.normpath(file_path)
+  file_paths = file_path.split(os.sep)
+  file_name, file_extension = os.path.splitext(os.path.basename(file_path))
+  parent_folder = os.path.dirname(file_path)
+  video_name = file_paths[-2]
   player_id, session_id=video_name.split('_solid_')
   return file_name, parent_folder, player_id, session_id
 
@@ -80,7 +84,8 @@ class MyCSVDataset(Dataset):
                 frame_path = parent_folder + "/0" + str(file_name)+ ".png"
 
             # the frames path, adjust it if needed
-            frame_path = "../Dataset" + frame_path[1:]
+            frame_path = "../Dataset/" + frame_path
+            frame_path = os.path.normpath(frame_path)
           
             frame = Image.open(frame_path).convert('RGB')
             frames.append(frame)
