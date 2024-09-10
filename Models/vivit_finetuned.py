@@ -52,7 +52,7 @@ class MyCSVDataset(Dataset):
         # get data item according to the index
         sample = self.data.iloc[idx]
         clip_path = sample['start_frame']
-        file_name, parent_folder = get_file_name_and_parent_folder(clip_path)
+        file_name, parent_folder, player_id, session_id = get_file_name_and_parent_folder(clip_path)
         file_name = int(file_name)
         frames=[]
         for i in range(32):
