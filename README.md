@@ -7,7 +7,7 @@ Please note:
 
 
 ## Dataset
-This project uses a dataset from The Arousal Video Game AnnotatIoN (AGAIN) Dataset, which is licensed under the MIT License. Please refer to the LICENSE file in the Solid folder under this folder for more information.  
+This project uses a dataset from The Arousal Video Game AnnotatIoN (AGAIN) Dataset, which is licensed under the MIT License. Please refer to the LICENSE file in the Solid folder for more information.  
 
 As the files in the dataset are too large to upload to GitHub, you can check and download the dataset here by following their instructions: https://www.again.institutedigitalgames.com/   
 
