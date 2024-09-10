@@ -71,8 +71,8 @@ Checkpoints of the Trained Models:
    Dataset/ clean_data.csv
 
 
-4. Run scripts:
-   Data preprocessing:
+3. Run scripts:  
+   3.1 Data preprocessing:  
    Go into Dataset folder, run the python scripts one by one, You can also choose to run the jupyter notebook files accordingly.
     
    This script is to generate a helper file which help to transform the Solid data into sample pairs :    
@@ -89,8 +89,8 @@ Checkpoints of the Trained Models:
    ```bash
    python update_pairs.py
    ```
-
-   Modeling：
+   
+   3.2 Modeling：  
    Go into Models folder, run the scripts:
 
    This script is to train and evaluate the random forest classifier(baseline) on our preprocessed dataset:
