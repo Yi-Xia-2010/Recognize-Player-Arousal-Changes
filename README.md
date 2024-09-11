@@ -4,6 +4,7 @@ This is the repository containing the supplement files for the paper "Knowing Ar
 Please note:    
     1. The default relative position (commented in scripts) has been set in our code, please adjust it yourself if needed.   
     2. Python version >= 3.11.7  
+    3. A GPU with more than 32GB of memory may be necessary.
 
 
 ## Dataset
