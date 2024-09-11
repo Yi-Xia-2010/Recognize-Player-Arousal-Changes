@@ -103,7 +103,7 @@ train_dataset, test_dataset = torch.utils.data.random_split(
 # %%
 from torch.utils.data import DataLoader
 # training
-train_dataloader = DataLoader(train_dataset, batch_size=4)
+train_dataloader = DataLoader(train_dataset, batch_size=1)
 # testing
 test_dataloader = DataLoader(test_dataset, batch_size=1)
 
