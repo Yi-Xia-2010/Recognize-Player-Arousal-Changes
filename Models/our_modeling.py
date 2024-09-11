@@ -750,7 +750,7 @@ torch.save(model, os.path.join(model_id, model_file))
 from transformers import VivitConfig, VivitForVideoClassification
 
 # Initializing a ViViT google/vivit-b-16x2-kinetics400 style configuration
-configuration = VivitConfig()
+configuration = VivitConfig(num_labels=3)
 
 # Initializing a model (with random weights) from the google/vivit-b-16x2-kinetics400 style configuration
 model = VivitForVideoClassification(configuration)
