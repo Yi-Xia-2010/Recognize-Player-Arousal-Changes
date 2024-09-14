@@ -197,11 +197,11 @@ class GfEncoder(nn.Module):
     def __init__(self):
         super(GfEncoder, self).__init__()
         self.layers = nn.Sequential(
-            nn.Linear(24*112, 1024),  # input layer
+            nn.Linear(24*112, 1024),  
             nn.ReLU(),  
-            nn.Linear(1024, 512),  # hidden layer
+            nn.Linear(1024, 512),  
             nn.ReLU(),  
-            nn.Linear(512, 768),  # output layer
+            nn.Linear(512, 768),  
         )
         
         # Xavier init
