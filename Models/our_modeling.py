@@ -189,7 +189,7 @@ for param in video_encoder.parameters():
     param.requires_grad = False
 
 # %% [markdown]
-# ### MLP GF Encoder
+# ### MLP GCF Encoder
 
 # %%
 # Defined the MLP GF encoder
@@ -423,18 +423,18 @@ with open('acc.txt', 'a') as f:
 print("successfully recorded")
 
 # %% [markdown]
-# ### Train MLP GF encoder (directly train on game features)
+# ### Training MLP GCF encoder (directly train on game features from scratch using supervised learning)
 
 # %%
 class GfEncoder_2(nn.Module):
     def __init__(self):
         super(GfEncoder_2, self).__init__()
         self.layers = nn.Sequential(
-            nn.Linear(24*112, 1024),  
+            nn.Linear(24*112, 1024), 
             nn.ReLU(), 
-            nn.Linear(1024, 512),  
-            nn.ReLU(),  
-            nn.Linear(512, 768),  
+            nn.Linear(1024, 512), 
+            nn.ReLU(), 
+            nn.Linear(512, 768), 
         )
         self.classifier = nn.Linear(in_features=768, out_features=3)
         
@@ -530,7 +530,7 @@ with open('acc.txt', 'a') as f:
 print("successfully recorded")
 
 # %% [markdown]
-# ### Only use representations from GF encoder trained by using contrastive learning
+# ### Only use representations from GCF encoder trained by using contrastive learning
 
 # %%
 contrastive_model = torch.load(os.path.join('./TrainedModels/contrastive_15epoch', 'model.pt'))
@@ -636,7 +636,7 @@ with open('acc.txt', 'a') as f:
 print("successfully recorded")
 
 # %% [markdown]
-# ### Extract GF encoder from trained contrastive model
+# ### Extract GCF encoder from trained contrastive model
 
 # %%
 gf_encoder_part = contrastive_model.ContrastiveModel.gf_model
@@ -695,108 +695,6 @@ with open('acc.txt', 'a') as f:
 print("successfully recorded")
 
 # %%
-# Training extract GF encoder, loss is extremly high, stop in the half.
-optimizer = torch.optim.AdamW(model.parameters(), lr=5e-5)
 
-
-criterion = nn.CrossEntropyLoss()
-
-device = "cuda" if torch.cuda.is_available() else "cpu"
-train_size=len(train_dataset)
-model.to(device)
-model.train()
-loss_list = []
-for epoch in range(6):
-    print("Epoch:", epoch)
-    sum_loss_list = []
-    for idx, batch in enumerate(train_dataloader):
-      
-        gf = batch.pop("game_tensor").to(device)
-        label = batch.pop("label").to(device)
-
-        outputs = model(gf_inputs=gf)
-        label = label.squeeze(1)
-
-        loss = criterion(outputs, label)
-
-        print("Epoch:",epoch," , idx:",idx," , Loss:", loss.item())
-        sum_loss_list.append(float(loss.item()))
-
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
-    avg_sum_loss = sum(sum_loss_list)/len(sum_loss_list)
-    print("epoch: ", epoch, "loss: ", float(avg_sum_loss))
-    loss_list.append(float(avg_sum_loss))
-
-# %%
-output_path ="./TrainedModels/Contrastive_15epoch_extracted_MLP_classification"
-model_id = output_path
-
-if not os.path.exists(model_id):
-    os.makedirs(model_id)
-model_file = 'model.pt'
-print("model_output:", model_id)
-torch.save(model, os.path.join(model_id, model_file))
-
-
-# %%
-
-
-# %% [markdown]
-# ### Direct train vivit from scrach
-
-# %%
-from transformers import VivitConfig, VivitForVideoClassification
-
-# Initializing a ViViT google/vivit-b-16x2-kinetics400 style configuration
-configuration = VivitConfig(num_labels=3)
-
-# Initializing a model (with random weights) from the google/vivit-b-16x2-kinetics400 style configuration
-model = VivitForVideoClassification(configuration)
-
-
-# %%
-# loss is extremly high, stop in the half.
-optimizer = torch.optim.AdamW(model.parameters(), lr=5e-5)
-
-device = "cuda" if torch.cuda.is_available() else "cpu"
-train_size=len(train_dataset)
-model.to(device)
-model.train()
-loss_list = []
-for epoch in range(11):
-    print("Epoch:", epoch)
-    sum_loss_list = []
-    for idx, batch in enumerate(train_dataloader):
-
-
-        pixel_values = batch.pop("pixel_values").to(device)
-        pixel_values = pixel_values.squeeze(1)
-        label = batch.pop("label").to(device)
-
-        outputs = model(pixel_values=pixel_values,labels=label)
-        loss = outputs.loss
-        print("Epoch:",epoch," , idx:",idx," , Loss:", loss.item())
-        sum_loss_list.append(float(loss.item()))
-
-        loss.backward()
-
-        optimizer.step()
-        optimizer.zero_grad()
-
-    avg_sum_loss = sum(sum_loss_list)/len(sum_loss_list)
-    print("epoch: ", epoch, "loss: ", float(avg_sum_loss))
-    loss_list.append(float(avg_sum_loss))
-
-# %%
-output_path ="./TrainedModels/vivit_fromscrach"
-model_id = output_path
-
-if not os.path.exists(model_id):
-    os.makedirs(model_id)
-model_file = 'model.pt'
-print("model_output:", model_id)
-torch.save(model, os.path.join(model_id, model_file))
 
 
