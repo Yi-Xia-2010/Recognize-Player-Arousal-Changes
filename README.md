@@ -25,6 +25,8 @@ This folder contains the scripts for training, finetuning, and evaluating the mo
 
 The acc.txt file is the file containing the accuracies of the models on the test set. 
 
+Finetuned vivit models are saved and loaded using methods from transformers, other models are using methods from pytorch.  
+
 Checkpoints of the Trained Models:
 | Model | Link |
 |----------|----------|
