@@ -28,11 +28,12 @@ The acc.txt file is the file containing the accuracies of the models on the test
 Checkpoints of the Trained Models:
 | Model | Link |
 |----------|----------|
-| Finetuned ViViT 1(10 epochs) | [download](https://drive.google.com/drive/folders/1VSUL2-XHr5sp_mtwJcTGwJoa8KNb-OnY?usp=drive_link)| 
-| Finetuned ViViT 2(15 epochs) | [download](https://drive.google.com/drive/folders/14x9Qb2qxn5HpwJLQPoRkjNAhbo8MnSGZ?usp=drive_link) |
-| MLP GF encoder | [download](https://drive.google.com/file/d/1rT1j6ugatiFsV0I52X3Cen2BEsqVhHoh/view?usp=drive_link) |
-| Finetuned ViViT 1 + MLP GF encoder| [download](https://drive.google.com/file/d/1P4szSf3wOKlPBnDOV9qxKjfZlvXOh8X9/view?usp=drive_link)  |
-| Finetuned ViViT 2 + MLP GF encoder| [download](https://drive.google.com/file/d/1Ya_u_72jQxs63orvLeVjxYNtWXmx2Cn_/view?usp=drive_link)  |
+| Finetuned ViViT 1(5 epochs) | [download](https://drive.google.com/drive/folders/1hTbv9rRI9-qr1YgY1uwbFsTjJZwWsnXf?usp=sharing)| 
+| Finetuned ViViT 2(10 epochs) | [download](https://drive.google.com/drive/folders/1VSUL2-XHr5sp_mtwJcTGwJoa8KNb-OnY?usp=drive_link)| 
+| Finetuned ViViT 3(15 epochs) | [download](https://drive.google.com/drive/folders/14x9Qb2qxn5HpwJLQPoRkjNAhbo8MnSGZ?usp=drive_link) |
+| GCF encoder | [download](https://drive.google.com/file/d/1rT1j6ugatiFsV0I52X3Cen2BEsqVhHoh/view?usp=drive_link) |
+| Finetuned ViViT 2 + GCF encoder| [download](https://drive.google.com/file/d/1P4szSf3wOKlPBnDOV9qxKjfZlvXOh8X9/view?usp=drive_link)  |
+| Finetuned ViViT 3 + GCF encoder| [download](https://drive.google.com/file/d/1Ya_u_72jQxs63orvLeVjxYNtWXmx2Cn_/view?usp=drive_link)  |
 
 
 ## Installation and Usage
