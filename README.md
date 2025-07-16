@@ -1,5 +1,5 @@
 # Recognizing-Player-Arousal-Changes-in-Games
-This is the repository containing the supplement files for the paper "Knowing Arousal Changes without Seeing You: Recognizing the Player’s Arousal Changes in the Game through Game Footage Videos and Game Context Features"  
+This is the repository containing the supplement files for the paper "Now You See Me: Recognizing the Player’s Arousal Changes in the Game through Game Footage Videos and Game Context Features"  
 
 Please note:    
     1. The default relative position (commented in scripts) has been set in our code, please adjust it yourself if needed.   
